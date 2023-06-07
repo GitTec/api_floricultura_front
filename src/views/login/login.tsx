@@ -8,9 +8,17 @@ import { useState, useEffect } from "react";
 import api from "../../services/api.floricultura";
 import { colors } from "../../constants/color";
 import { StatusBar } from "expo-status-bar";
+import { useLoading } from "../../hooks/Loading";
+import { Controller, useForm } from "react-hook-form";
+import { useAuth } from "../../hooks/Autenticar";
 
 export default function Login() {
+
+    const { setCarregando } = useLoading();
+    const { fazerLogin } = useAuth();
     const { navigate } = useNavigation();
+    const [login, setLogin] = useState("");
+    const [senha, setSenha] = useState("");
     const [apiIsRunning, setApiIsRunning] = useState(false);
 
     useEffect(() => {
@@ -23,7 +31,7 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
-            <StatusBar hidden/>
+            <StatusBar hidden />
             <Image
                 style={styles.logo}
                 source={logoFloricultura}
@@ -32,13 +40,17 @@ export default function Login() {
 
             <TextInput
                 style={styles.input}
-                label="Digite seu Email"
+                label="Informe seu login"
+                value={login}
+                onChangeText={value => setLogin(value)}
                 right={<TextInput.Icon icon="email" />}
             />
 
             <TextInput
                 style={styles.input}
-                label="Digite sua Senha"
+                label="Informe sua Senha"
+                value={senha}
+                onChangeText={value => setSenha(value)}
                 secureTextEntry
                 right={<TextInput.Icon icon="eye" />}
             />
@@ -48,8 +60,7 @@ export default function Login() {
                 icon="login"
                 mode="contained"
                 onPress={() => {
-                    //@ts-ignore
-                    navigate("Categoria")
+                    fazerLogin(login, senha)
                 }}>
                 Acessar
             </Button>

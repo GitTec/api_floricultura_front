@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#32b768",
+        backgroundColor: colors.green,
         padding:10
     },
     textLista: {
@@ -15,18 +15,23 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    botao:{
-        width: 200,
-        height: 50,
-        backgroundColor: '#ab4651',
+    botao: {
+        width: "50%",
+        backgroundColor: colors.red,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:10
+        marginTop: 10,
+    },
+    botaoAtualizar:{
+        width:"50%",
+        backgroundColor: colors.blue,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10
     },
     tabela:{
         marginTop:10,
         backgroundColor:colors.gray,
         width:"100%",
-        
     }
 });

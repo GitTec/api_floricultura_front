@@ -1,5 +1,5 @@
 export interface IEstado {
     id_Estado: number;
-    nome: String;
+    nome: string;
     sigla: string;
 }

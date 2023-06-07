@@ -2,12 +2,14 @@ import { View } from "react-native"
 import { Button, Text } from "react-native-paper"
 import { Image } from "react-native"
 import logoFloricultura from "../../assets/logoFloricultura.png";
-import { styles } from "./category.style";
+import { styles } from "./index.style";
 import { useNavigation } from "@react-navigation/core";
 import { colors } from "../../constants/color";
+import { useAuth } from "../../hooks/Autenticar";
 
-export default function Categoria() {
+export default function Menu() {
     const { navigate } = useNavigation();
+    const { usuario, fazerLogout } = useAuth();
 
     return (
         <View style={styles.container}>
@@ -15,6 +17,16 @@ export default function Categoria() {
                 style={styles.logo}
                 source={logoFloricultura}
             />
+            <Text style={styles.textLogin}>{usuario?.nome}</Text>
+            <Button
+                mode="text"
+                onPress={() => {
+                    fazerLogout();
+                }}
+            >
+                SAIR
+            </Button>
+
             <Text style={styles.textLogin}>Escolha a lista que deseja</Text>
 
             <Button

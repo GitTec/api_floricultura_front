@@ -3,6 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Routes } from './src/routes/index.routes';
 import { AppRegistry } from 'react-native';
 import { expo } from './app.json';
+import { LoadingProvider } from './src/hooks/Loading';
+import { AuthProvider } from './src/hooks/Autenticar';
 
 export default function App() {
   return (
@@ -11,7 +13,11 @@ export default function App() {
     }}>
 
       <PaperProvider>
-        <Routes />
+        <LoadingProvider>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+        </LoadingProvider>
       </PaperProvider>
     </SafeAreaView>
   );

@@ -1,20 +1,37 @@
 import { useState, useEffect } from "react";
 import { ICidade } from "../../../interfaces/cidades.interface";
 import api from "../../../services/api.floricultura";
-import { View } from "react-native"
-import { Button, DataTable, Text } from "react-native-paper"
+import { Alert, View } from "react-native"
+import { Button, DataTable, IconButton, Text } from "react-native-paper"
 import { styles } from "./listaCity.style";
 import { useNavigation } from "@react-navigation/native";
+import { useLoading } from "../../../hooks/Loading";
 
 export default function ListaCidades() {
 
-    const {navigate} = useNavigation();
+    const { setCarregando } = useLoading();
+    const { navigate } = useNavigation();
     const [cidades, setCidades] = useState<ICidade[]>([]);
 
-    useEffect(() => {
+    function carregarCidade() {
+        setCarregando(true);
         api.get("/cidade").then((dados) => {
             setCidades(dados.data);
+        }).finally(() => {
+            setCarregando(false);
         })
+    }
+
+    function excluirCidade(id: number) {
+        api.delete(`/cidade/${id}`).then((dados) => {
+            Alert.alert("Sucesso", "Excluido com sucesso!")
+        }).catch((err) => {
+            Alert.alert("Ops...", "Erro ao excluir cidade!")
+        })
+    }
+
+    useEffect(() => {
+        carregarCidade();
     }, [])
 
     return (
@@ -33,11 +50,23 @@ export default function ListaCidades() {
                 Adicionar
             </Button>
 
-            <DataTable>
+            <Button
+                style={styles.botaoAtualizar}
+                icon="refresh"
+                mode="contained"
+                onPress={() => {
+                    carregarCidade();
+                }}>
+                Atualizar
+            </Button>
+
+            <DataTable style={styles.tabela}>
                 <DataTable.Header>
                     <DataTable.Title>Cód</DataTable.Title>
                     <DataTable.Title>Nome</DataTable.Title>
                     <DataTable.Title>UF</DataTable.Title>
+                    <DataTable.Title>EXCLUIR</DataTable.Title>
+                    <DataTable.Title>EDITAR</DataTable.Title>
                 </DataTable.Header>
 
                 {
@@ -46,6 +75,15 @@ export default function ListaCidades() {
                             <DataTable.Cell>{cidade.id}</DataTable.Cell>
                             <DataTable.Cell>{cidade.nome}</DataTable.Cell>
                             <DataTable.Cell>{cidade.sigla_estado}</DataTable.Cell>
+                            <DataTable.Cell><IconButton icon="trash-can" iconColor="red" onPress={() => {
+                                Alert.alert("Confirmação", "Deseja realmente excluir?",
+                                    [{ text: "Não", style: "cancel" }, {
+                                        text: "Sim", onPress: () => {
+                                            excluirCidade(+cidade.id);
+                                        }
+                                    }])
+                            }} /></DataTable.Cell>
+                            <DataTable.Cell><IconButton icon="square-edit-outline" iconColor="blue"/></DataTable.Cell>
                         </DataTable.Row>
                     })
                 }
