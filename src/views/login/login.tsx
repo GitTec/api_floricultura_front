@@ -19,11 +19,11 @@ export default function Login() {
     const { navigate } = useNavigation();
     const [login, setLogin] = useState("");
     const [senha, setSenha] = useState("");
-    const [apiIsRunning, setApiIsRunning] = useState(false);
+    const [apiIsRunning, setApiIsRunning] = useState(false);    //criando estados para verificar se esta rodadndo a aplicacao
 
     useEffect(() => {
         api.get("/").then(data => {
-            if (data.status === 200) {
+            if (data.status === 200) {  
                 setApiIsRunning(true);
             }
         })
@@ -48,9 +48,9 @@ export default function Login() {
 
             <TextInput
                 style={styles.input}
-                label="Informe sua Senha"
+                label="Informe sua Senha"   //frase que aparece no campo a ser digitado
                 value={senha}
-                onChangeText={value => setSenha(value)}
+                onChangeText={value => setSenha(value)} //definindo o valor atual do campo de entrada
                 secureTextEntry
                 right={<TextInput.Icon icon="eye" />}
             />
@@ -68,11 +68,11 @@ export default function Login() {
             <Avatar.Icon
                 size={24}
                 icon="checkbox-blank-circle"
-                color={apiIsRunning ? colors.green : colors.red}
+                color={apiIsRunning ? colors.green : colors.red}    //se a api estiver rodando apresente a cor verde, senao vermelha
             />
 
             <Text>
-                {apiIsRunning ? "CONECTADO" : "DESCONECTADO"}
+                {apiIsRunning ? "CONECTADO" : "DESCONECTADO"}   
             </Text>
         </View>
     );

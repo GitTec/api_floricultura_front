@@ -19,8 +19,9 @@ export default function CadastroCategoria() {
         })
     }, [])
 
+    /*Aqui uso a biblioteca useForm(ajuda a gerenciar formularios no react)desestruturo o mesmo em variaveis*/
     const { control, handleSubmit, formState: { errors } } = useForm({
-        defaultValues: {
+        defaultValues: {    //Aqui defino os valores padroes dos campos
             nome: "",
         }
     });
@@ -42,9 +43,9 @@ export default function CadastroCategoria() {
         <Text style={styles.text}>Cadastre uma nova categoria</Text>
 
         <Controller
-            control={control}
+            control={control}   //control: objeto que serve para controlar e interagir com o formulario, registrar campos, validar entradas etc
             name="nome"
-            render={({ field }) => {
+            render={({ field }) => {    //renderizado o campo na tela
                 return <TextInput
                     style={styles.input}
                     placeholder="Informe o nome"
@@ -60,7 +61,7 @@ export default function CadastroCategoria() {
             mode="contained"
             icon="content-save"
             onPress={
-                handleSubmit(onSubmit)
+                handleSubmit(onSubmit)  //usado para enviar o formulario do onSubmit
             }>
             SALVAR
         </Button>

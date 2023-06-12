@@ -2,8 +2,12 @@ import * as React from 'react';
 import { ActivityIndicator, Platform, View, StyleSheet } from 'react-native';
 import { Paragraph, Portal, Dialog } from 'react-native-paper';
 
-const isIOS = Platform.OS === 'ios';
+/*criei uma constante que recebe Platform.OS (retorna uma string indicando o sistema operacional 
+em que o código está sendo executado.)*/
+const isIOS = Platform.OS === 'ios';    
 
+/*crio uma constante DialogWithLoadingIndicator com a propriedade visible para renderizar um dialogo de carregamento se o visible for true,
+ou seja é uma função que irá renderizar o carregamento quando visible */
 const DialogWithLoadingIndicator = ({
     visible
 }: {

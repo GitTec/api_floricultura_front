@@ -5,13 +5,12 @@ import { RoutesPublic } from './public.routes';
 
 export function Routes() {
 
-    const { usuario } = useAuth();
-
+    const { usuario } = useAuth();  //desestruturando o usuario do useAuth
     return (
         /*? --> if : else*/
         <NavigationContainer>
             {
-                usuario ? <RoutesProtected /> : <RoutesPublic />
+                usuario ? <RoutesProtected /> : <RoutesPublic />//se o usuario tiver autenticado entra nas protegidas, senao nas publicas
             }
         </NavigationContainer>
     );

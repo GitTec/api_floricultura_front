@@ -13,6 +13,7 @@ export default function ListaCategoria() {
     const { navigate } = useNavigation();
     const [categorias, setCategorias] = useState<ICategoria[]>([]);
 
+    //Aqui defino um função para trazer as categorias cadastradas
     function carregarCategoria() {
         setCarregando(true);
         api.get("/categoria").then((dados) => {
@@ -22,6 +23,7 @@ export default function ListaCategoria() {
         })
     }
 
+    //Aqui defino um função para excluir uma categoria cadastrada
     function excluirCategoria(id: number) {
         api.delete(`/categoria/${id}`).then((dados) => {
             Alert.alert("Sucesso", "Excluido com sucesso!")
@@ -30,6 +32,7 @@ export default function ListaCategoria() {
 
         })
     }
+    //Uso essa função para realizar o carregamento da categoria depois de deletada
     useEffect(() => {
         carregarCategoria();
     }, [])

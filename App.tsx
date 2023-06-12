@@ -6,13 +6,15 @@ import { expo } from './app.json';
 import { LoadingProvider } from './src/hooks/Loading';
 import { AuthProvider } from './src/hooks/Autenticar';
 
+//Defino uma função App como componente principal da minha aplicação
 export default function App() {
   return (
+    //usado para garantir que o conteudo seja exibido em diferentes dispositivos e telas
     <SafeAreaView style={{
       flex: 1
     }}>
 
-      <PaperProvider>
+      <PaperProvider> 
         <LoadingProvider>
           <AuthProvider>
             <Routes />
@@ -24,3 +26,7 @@ export default function App() {
 }
 
 AppRegistry.registerComponent(expo.name, () => App);
+
+/*O AppRegistryéregisterComponent é usado para registrar um componente na aplicação,
+ associando-o a um nome.
+ Que no meu caso é App*/

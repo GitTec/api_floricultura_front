@@ -11,16 +11,20 @@ import CadastroUsuario from '../views/Usuario/cadastroUsuarios/cadastroUser';
 import ListaUsuario from '../views/Usuario/listagemUsuarios/listaUser';
 import Menu from '../views/menu';
 
+
+//defino essa constante para navegação de telas
 const { Navigator, Screen } = createStackNavigator();
+
+//crio uma função para definir apenas as rotas protegidas
 export function RoutesProtected() {
 
     return (
         <Navigator
             screenOptions={{
-                headerShown: false
+                headerShown: false  //indica que o cabeçalho nao sera exibido
             }}>
 
-            <Screen
+            <Screen //define as difentes tealas dentro do navegador
                 name="Menu"
                 component={Menu}
             />
